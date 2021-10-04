@@ -1,11 +1,11 @@
 import React from "react";
-import { styled, createTheme, ThemeProvider } from "@mui/system";
-import { makeStyles } from "@mui/styles";
 
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import { Slider } from "@mui/material";
 import Delete from "@mui/icons-material/Delete";
+
+import { makeStyles, useTheme } from "./theme/index";
 
 const useAppStyles = makeStyles({
   container: {
@@ -27,11 +27,15 @@ const useAppStyles = makeStyles({
   },
 });
 
-const useIconStyles = makeStyles({
+const useIconStyles = makeStyles((theme) => ({
   icon: {
-    color: (props: IconType) => (props.done ? "green" : "red"),
+    // color: (props: IconType) => (props.done ? "green" : "red"),
+    color: (props: IconType) =>
+      props.done
+        ? theme.palette.background.main
+        : theme.palette.primary.lightBlue,
   },
-});
+}));
 
 type IconType = {
   done: Boolean;
@@ -48,6 +52,7 @@ function DeleteIcon(props: IconType) {
 
 function App() {
   const classes = useAppStyles();
+  console.log("hello");
 
   return (
     <Container className={classes.container}>
